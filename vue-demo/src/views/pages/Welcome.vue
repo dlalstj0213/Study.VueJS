@@ -2,15 +2,15 @@
   <div class="hello">
     <h1>Welcome Vue.js!</h1>
     <p>Nickname</p>
-    <input type="text" name="" id="">
+    <input type="text" name="" id="" />
     <button>Join</button>
   </div>
 </template>
 
 <script>
 export default {
-  name: "WelcomePage"
-}
+  name: "WelcomePage",
+};
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
