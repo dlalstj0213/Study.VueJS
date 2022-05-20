@@ -1,6 +1,6 @@
 <template>
   <div class="hello">
-    <h1>{{ msg }}</h1>
+    <h1>Welcome Vue.js!</h1>
     <p>Nickname</p>
     <input type="text" name="" id="">
     <button>Join</button>
@@ -9,10 +9,7 @@
 
 <script>
 export default {
-  name: "WelcomePage",
-  props: {
-    msg: String
-  }
+  name: "WelcomePage"
 }
 </script>
 
