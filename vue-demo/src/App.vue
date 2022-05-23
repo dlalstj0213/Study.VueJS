@@ -1,7 +1,8 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png" />
-  <router-view />
-  <p id="err-msg">Here is the Error Message field</p>
+  <div>
+    <img alt="Vue logo" src="./assets/logo.png" />
+    <router-view />
+  </div>
 </template>
 
 <script>
