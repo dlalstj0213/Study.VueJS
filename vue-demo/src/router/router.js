@@ -15,6 +15,11 @@ const routes = [
     name: "RoomList",
     component: () => import("@/pages/RoomList.vue"),
   },
+  {
+    path: "/room/chat/:id",
+    name: "Chat",
+    component: () => import("@/pages/Chat.vue"),
+  },
 ];
 
 const router = createRouter({
