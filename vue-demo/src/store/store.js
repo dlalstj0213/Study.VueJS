@@ -1,17 +1,10 @@
 import { createStore } from "vuex";
+import User from "./user.js";
+// import Room from "./room.js";
 
 export default createStore({
-  state: {
-    counter: 10,
-  },
-  getters: {
-    time2(state) {
-      return state.counter * 2;
-    },
-  },
-  mutations: {
-    setCounter(state, value) {
-      state.counter = value;
-    },
+  modules: {
+    users: User,
+    // rooms: Room,
   },
 });

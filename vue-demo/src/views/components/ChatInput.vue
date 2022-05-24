@@ -1,7 +1,7 @@
 <template>
   <div>
     <input type="text" @keyup="enter" v-model="comment" />
-    <button @click="send">Send</button>
+    <button @click="send">{{ btnName }}</button>
   </div>
 </template>
 
@@ -12,9 +12,13 @@ export default {
   data() {
     return { comment: "" };
   },
+  props: {
+    btnName: String,
+  },
   methods: {
     send() {
-      console.log(this.comment);
+      if (this.comment === "") return;
+      this.$emit("send", this.comment);
       this.comment = "";
     },
     enter({ key, code }) {
