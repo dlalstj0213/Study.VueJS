@@ -4,7 +4,7 @@
       <div class="number">
         <p>{{ number }}</p>
       </div>
-      <div class="room-name">
+      <div class="name">
         <p>{{ roomName }}</p>
       </div>
       <div>
@@ -78,11 +78,11 @@ export default {
   position: absolute;
 }
 
-.room > .top > .room-name {
+.room > .top > .name {
   width: 100%;
 }
 
-.room > .top > .room-name > p {
+.room > .top > .name > p {
   margin: 13px 0 0 5px;
   text-align: left;
 }

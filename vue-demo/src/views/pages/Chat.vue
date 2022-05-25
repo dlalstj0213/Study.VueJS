@@ -90,7 +90,7 @@ export default {
 
 
 <style scope>
-.room-name {
+.chat-room-name {
   width: fit-content;
   padding-left: 10px;
   padding-right: 10px;
