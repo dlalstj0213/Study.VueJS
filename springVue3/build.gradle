@@ -1,0 +1,69 @@
+plugins {
+    id 'org.springframework.boot' version '2.7.0'
+    id 'io.spring.dependency-management' version '1.0.11.RELEASE'
+    id "com.github.node-gradle.node" version "3.3.0"
+    id 'java'
+}
+
+/* 관련 node 정보 */
+node {
+    download = true
+    version = "16.15.0"
+    npmVersion = "8.10.0"
+    yarnVersion = "1.22.18"
+    npmInstallCommand = "install"
+    npmWorkDir = file("${project.projectDir}/.gradle/npm")
+    yarnWorkDir = file("${project.projectDir}/.gradle/yarn")
+    nodeModulesDir = file("${project.projectDir}/front")
+}
+
+/* 프론트 빌드 */
+task yarnBuild(type: YarnTask) {
+//    dependsOn cleanDistAndStatic
+//    dependsOn npmInstall
+    args = ['run', "build"]
+}
+
+/* dist 하위 파일을 static 폴더에 복사 */
+task copyDistToStatic(type: Copy) {
+    from("${project.projectDir}/front/public/index.html")
+    into("${project.projectDir}/src/main/resources/templates/")
+    includeEmptyDirs = true
+}
+
+processResources.dependsOn 'yarnBuild'
+//processResources.dependsOn 'copyDistToStatic'
+
+/* build 실행시 jar 파일만들때 먼저 프론트 빌드관련 task 실행 */
+bootJar {
+    archiveFileName = "app.jar"
+    dependsOn(yarnBuild)
+    dependsOn(copyDistToStatic)
+}
+
+group = 'com.example'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '1.8'
+
+configurations {
+    compileOnly {
+        extendsFrom annotationProcessor
+    }
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    compileOnly 'org.projectlombok:lombok'
+    developmentOnly 'org.springframework.boot:spring-boot-devtools'
+    annotationProcessor 'org.projectlombok:lombok'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+}
+
+tasks.named('test') {
+    useJUnitPlatform()
+}
