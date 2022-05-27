@@ -11,5 +11,6 @@ import java.util.List;
 @NoArgsConstructor
 public class User {
     private String nickname;
+    @Builder.Default
     private List<Room> rooms = new ArrayList<>();
 }

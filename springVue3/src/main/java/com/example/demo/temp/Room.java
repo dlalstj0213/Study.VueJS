@@ -16,6 +16,7 @@ public class Room {
     private int number;
     private String roomName;
     private String owner;
+    @Builder.Default
     private List<String> participants = new ArrayList<>();
     private int total;
 }
