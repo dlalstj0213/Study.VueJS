@@ -13,7 +13,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Service
-@ServerEndpoint(value = "/chat/:id")
+@ServerEndpoint(value = "/chat/socket")
 public class WebSocketChat {
     private static Set<Session> clients = Collections.synchronizedSet(new HashSet<Session>());
 

@@ -17,6 +17,7 @@
 <script>
 import ChatInput from "../components/ChatInput.vue";
 import CommentBox from "../components/CommentBox.vue";
+import {ws} from "../../utils/socket";
 
 export default {
   name: "ChatPage",
@@ -67,6 +68,12 @@ export default {
   },
   methods: {
     send(value) {
+      let data = {};
+      data.mid = value;
+      data.msg = value;
+      data.date = new Date().toLocaleString();
+      const temp = JSON.stringify(data);
+      ws.send(temp);
       this.chats.push({ nickname: this.from, comment: value });
     },
     scrollToBottom() {
@@ -80,6 +87,11 @@ export default {
     },
   },
   mounted() {
+
+    ws.onmessage = function(msg) {
+      console.log(msg);
+    }
+
     this.scrollToBottom();
   },
   updated() {
