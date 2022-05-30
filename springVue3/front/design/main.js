@@ -1,3 +1,5 @@
+import { createApp } from "vue";
+import App from "@@/App.vue";
 import { createWebHistory, createRouter } from "vue-router";
 
 const routes = [
@@ -8,17 +10,17 @@ const routes = [
   {
     path: "/welcome",
     name: "Welcome",
-    component: () => import("@/views/pages/Welcome.vue"),
+    component: () => import("@@/views/pages/Welcome.vue"),
   },
   {
     path: "/room",
     name: "RoomList",
-    component: () => import("@/views/pages/RoomList.vue"),
+    component: () => import("@@/views/pages/RoomList.vue"),
   },
   {
-    path: "/room/chat/:roomNumber",
+    path: "/room/chat",
     name: "Chat",
-    component: () => import("@/views/pages/Chat.vue"),
+    component: () => import("@@/views/pages/Chat.vue"),
   },
 ];
 
@@ -28,4 +30,4 @@ const router = createRouter({
   routes,
 });
 
-export default router;
+createApp(App).use(router).mount("#app");

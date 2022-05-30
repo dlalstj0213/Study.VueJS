@@ -1,0 +1,17 @@
+.chat-room-name {
+  width: fit-content;
+  padding-left: 10px;
+  padding-right: 10px;
+  margin: 10px auto;
+  border: solid 2px;
+}
+
+.screen {
+  width: 500px;
+  height: 500px;
+  margin: auto auto;
+  padding-top: 10px;
+  border: solid 1px;
+  border-radius: 5%;
+  overflow-y: scroll;
+}

@@ -37,7 +37,11 @@ export default {
   },
   methods: {
     join() {
-      this.$router.push({ name: "Chat", params: { roomNumber: this.number } , query: {roomName: this.roomName}});
+      this.$router.push({
+        name: "Chat",
+        params: { roomNumber: this.number },
+        query: { roomName: this.roomName },
+      });
     },
   },
   computed: {
@@ -49,64 +53,5 @@ export default {
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
-.room {
-  width: 20rem;
-  height: 5rem;
-  margin: 20px auto;
-  border: solid 1px;
-}
-
-.room > .top {
-  height: 60%;
-  display: flex;
-}
-
-.room > .top > .number {
-  width: 40px;
-  position: relative;
-}
-
-.room > .top > .number > p {
-  top: 0px;
-  width: 20px;
-  height: 20px;
-  margin: 5px 0 0 5px;
-  border: solid 1px;
-  border-radius: 50%;
-  display: block;
-  position: absolute;
-}
-
-.room > .top > .name {
-  width: 100%;
-}
-
-.room > .top > .name > p {
-  margin: 13px 0 0 5px;
-  text-align: left;
-}
-
-.room > .bottom {
-  height: 40%;
-  display: flex;
-}
-
-.room > .bottom > .owner {
-  width: 100%;
-}
-
-.room > .bottom > .owner > p {
-  margin: 5px 0 0 5px;
-  text-align: left;
-}
-
-.room > .bottom > .count {
-  width: fit-content;
-}
-
-.room > .bottom > .count > p {
-  margin: 5px 5px 0 5px;
-  text-align: right;
-}
+<style scoped lang="scss" src="styles/components/RoomItem.scss">
 </style>

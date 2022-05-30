@@ -28,8 +28,8 @@
 </template>
 
 <script>
-import RoomItem from "../components/RoomItem.vue";
-import { get, post } from "../../utils/httpClient";
+import RoomItem from "@/views/components/RoomItem.vue";
+import { get, post } from "@/utils/httpClient";
 
 export default {
   name: "RoomList",

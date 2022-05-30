@@ -12,7 +12,20 @@ module.exports = {
   configureWebpack: {
     resolve: {
       alias: {
-        "@": path.join(__dirname, "src/views/"),
+        "@": path.join(__dirname, "src"),
+        styles: path.join(__dirname, "src/assets/scss"),
+        // "@": path.join(__dirname, "src/views/"),
+        "@@": path.join(__dirname, "design"),
+      },
+      extensions: [".png", ".jpg", ".vue", ".js", ".scss"],
+    },
+  },
+  css: {
+    loaderOptions: {
+      sass: {
+        additionalData: `
+          @import "styles/_variables.scss";
+        `,
       },
     },
   },

@@ -1,5 +1,5 @@
 import { createStore } from "vuex";
-import User from "./user.js";
+import User from "@/store/user.js";
 // import Room from "./room.js";
 
 export default createStore({

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <img alt="Vue logo" src="./assets/logo.png" />
+    <img alt="Vue logo" src="@/assets/logo.png" />
     <router-view />
   </div>
 </template>
@@ -16,21 +16,6 @@
 // };
 </script>
 
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-
-#err-msg {
-  color: red;
-}
-
-h4 {
-  color: #42b983;
-}
+<style lang="scss">
+@import "styles/App.scss";
 </style>

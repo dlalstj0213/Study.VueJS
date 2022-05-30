@@ -1,0 +1,16 @@
+#app {
+  font-family: $body-font-family;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-align: center;
+  color: $color-main;
+  margin-top: 60px;
+}
+
+#err-msg {
+  color: red;
+}
+
+h4 {
+  color: $color-green;
+}

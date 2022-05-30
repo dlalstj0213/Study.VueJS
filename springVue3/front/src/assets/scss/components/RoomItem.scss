@@ -1,0 +1,59 @@
+.room {
+  width: 20rem;
+  height: 5rem;
+  margin: 20px auto;
+  border: solid 1px;
+
+  .top {
+    height: 60%;
+    display: flex;
+
+    .number {
+      width: 40px;
+      position: relative;
+
+      p {
+        top: 0px;
+        width: 20px;
+        height: 20px;
+        margin: 5px 0 0 5px;
+        border: solid 1px;
+        border-radius: 50%;
+        display: block;
+        position: absolute;
+      }
+    }
+
+    .name {
+      width: 100%;
+
+      p {
+        margin: 13px 0 0 5px;
+        text-align: left;
+      }
+    }
+  }
+
+  .bottom {
+    height: 40%;
+    display: flex;
+
+    .owner {
+      width: 100%;
+
+      p {
+        margin: 5px 0 0 5px;
+        text-align: left;
+      }
+    }
+
+    .count {
+      width: fit-content;
+
+      p {
+        margin: 5px 5px 0 5px;
+        text-align: right;
+      }
+    }
+  }
+}

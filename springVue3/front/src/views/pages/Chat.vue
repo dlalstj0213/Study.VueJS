@@ -15,9 +15,9 @@
 </template>
 
 <script>
-import ChatInput from "../components/ChatInput.vue";
-import CommentBox from "../components/CommentBox.vue";
-import {createSocket} from "../../utils/socket";
+import ChatInput from "@/views/components/ChatInput.vue";
+import CommentBox from "@/views/components/CommentBox.vue";
+import { createSocket } from "@/utils/socket";
 
 export default {
   name: "ChatPage",
@@ -29,7 +29,7 @@ export default {
     return {
       roomName: this.$route.query.roomName,
       chats: [],
-      ws: createSocket(this.$route.params.roomNumber)
+      ws: createSocket(this.$route.params.roomNumber),
     };
   },
   methods: {
@@ -42,15 +42,15 @@ export default {
     },
     sendComment(value) {
       let data = {
-        from : this.$store.getters.getNickname,
-        msg : value,
-        date : new Date().toLocaleString()
+        from: this.$store.getters.getNickname,
+        msg: value,
+        date: new Date().toLocaleString(),
       };
       const temp = JSON.stringify(data);
       this.ws.send(temp);
     },
-    addCommentBox({from, msg, date}) {
-      console.log(date)
+    addCommentBox({ from, msg, date }) {
+      console.log(date);
       return this.chats.push({ nickname: from, comment: msg });
     },
   },
@@ -63,7 +63,7 @@ export default {
     this.ws.onmessage = (msg) => {
       let data = JSON.parse(msg.data);
       this.addCommentBox(data);
-    }
+    };
     this.scrollToBottom();
   },
   updated() {
@@ -73,22 +73,5 @@ export default {
 </script>
 
 
-<style scope>
-.chat-room-name {
-  width: fit-content;
-  padding-left: 10px;
-  padding-right: 10px;
-  margin: 10px auto;
-  border: solid 2px;
-}
-
-.screen {
-  width: 500px;
-  height: 500px;
-  margin: auto auto;
-  padding-top: 10px;
-  border: solid 1px;
-  border-radius: 5%;
-  overflow-y: scroll;
-}
+<style scope lang="scss" src="styles/pages/Chat.scss">
 </style>
