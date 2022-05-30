@@ -15,7 +15,6 @@ const User = {
   },
   actions: {
     addUser({ commit }, value) {
-      console.log("addUser:", value);
       commit("setNickname", value);
     },
   },

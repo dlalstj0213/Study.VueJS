@@ -5,7 +5,7 @@
       <CommentBox
         v-for="(chat, idx) in chats"
         :key="idx"
-        :from="from"
+        :from="this.$store.getters.getNickname"
         :comment="chat.comment"
         :nickname="chat.nickname"
       />
@@ -17,7 +17,7 @@
 <script>
 import ChatInput from "../components/ChatInput.vue";
 import CommentBox from "../components/CommentBox.vue";
-import {ws} from "../../utils/socket";
+import {createSocket} from "../../utils/socket";
 
 export default {
   name: "ChatPage",
@@ -27,58 +27,31 @@ export default {
   },
   data() {
     return {
-      roomName: "defualt",
-      from: "Rhie",
-      chats: [
-        { nickname: "Rhie", comment: "Hello!" },
-        {
-          nickname: "Steve",
-          comment:
-            "Hello!Hello!Hello!Hello!Hello!Hello!Hello!Hello!Hello!Hello!Hello!Hello!Hello!Hello!",
-        },
-        {
-          nickname: "John",
-          comment:
-            "Hello!Hello!Hello!Hello!Hello!Hello!Hello!Hello!Hello!Hello!Hello!Hello!Hello!Hello!",
-        },
-        { nickname: "Rhie", comment: "Hello!" },
-        {
-          nickname: "Steve",
-          comment:
-            "Hello!Hello!Hello!Hello!Hello!Hello!Hello!Hello!Hello!Hello!Hello!Hello!Hello!Hello!",
-        },
-        {
-          nickname: "John",
-          comment:
-            "Hello!Hello!Hello!Hello!Hello!Hello!Hello!Hello!Hello!Hello!Hello!Hello!Hello!Hello!",
-        },
-        { nickname: "Rhie", comment: "Hello!" },
-        {
-          nickname: "Steve",
-          comment:
-            "Hello!Hello!Hello!Hello!Hello!Hello!Hello!Hello!Hello!Hello!Hello!Hello!Hello!Hello!",
-        },
-        {
-          nickname: "John",
-          comment:
-            "Hello!Hello!Hello!Hello!Hello!Hello!Hello!Hello!Hello!Hello!Hello!Hello!Hello!Hello!",
-        },
-      ],
+      roomName: this.$route.query.roomName,
+      chats: [],
+      ws: createSocket(this.$route.params.roomNumber)
     };
   },
   methods: {
     send(value) {
-      let data = {};
-      data.mid = value;
-      data.msg = value;
-      data.date = new Date().toLocaleString();
-      const temp = JSON.stringify(data);
-      ws.send(temp);
-      this.chats.push({ nickname: this.from, comment: value });
+      this.sendComment(value);
     },
     scrollToBottom() {
       let elmnt = document.getElementById("screen");
       elmnt.scrollTop = elmnt.scrollHeight;
+    },
+    sendComment(value) {
+      let data = {
+        from : this.$store.getters.getNickname,
+        msg : value,
+        date : new Date().toLocaleString()
+      };
+      const temp = JSON.stringify(data);
+      this.ws.send(temp);
+    },
+    addCommentBox({from, msg, date}) {
+      console.log(date)
+      return this.chats.push({ nickname: from, comment: msg });
     },
   },
   watch: {
@@ -87,11 +60,10 @@ export default {
     },
   },
   mounted() {
-
-    ws.onmessage = function(msg) {
-      console.log(msg);
+    this.ws.onmessage = (msg) => {
+      let data = JSON.parse(msg.data);
+      this.addCommentBox(data);
     }
-
     this.scrollToBottom();
   },
   updated() {

@@ -41,10 +41,8 @@ export default {
       if (this.nickname !== null && this.nickname !== "") {
         const { result, user } = await validNickname(this.nickname);
         if (result === "success") {
-          console.log("user:", user);
           await this.$store.dispatch("addUser", user.nickname);
-          this.$router.push({ name: "RoomList" });
-          console.log("testing1:", this.$store.getters.getNickname);
+          await this.$router.push({name: "RoomList"});
         }
       }
       return;

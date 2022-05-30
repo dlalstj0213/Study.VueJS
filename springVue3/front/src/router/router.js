@@ -16,7 +16,7 @@ const routes = [
     component: () => import("@/pages/RoomList.vue"),
   },
   {
-    path: "/room/chat/:id",
+    path: "/room/chat/:roomNumber",
     name: "Chat",
     component: () => import("@/pages/Chat.vue"),
   },

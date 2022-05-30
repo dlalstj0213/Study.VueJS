@@ -37,7 +37,7 @@ export default {
   },
   methods: {
     join() {
-      this.$router.push({ name: "Chat", params: { id: this.number } });
+      this.$router.push({ name: "Chat", params: { roomNumber: this.number } , query: {roomName: this.roomName}});
     },
   },
   computed: {

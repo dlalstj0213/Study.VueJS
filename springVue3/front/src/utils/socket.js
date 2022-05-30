@@ -1,1 +1,3 @@
-export const ws = new WebSocket("ws://" + location.host + "/chat/socket");
+export const createSocket = (roomNumber) => {
+    return new WebSocket("ws://" + location.host + `/chat/${roomNumber}`);
+}
