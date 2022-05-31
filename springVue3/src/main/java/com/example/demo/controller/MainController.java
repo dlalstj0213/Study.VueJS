@@ -8,6 +8,7 @@ public class MainController {
 
     @GetMapping(value = {"/", "/welcome", "/room"})
     public String index(){
+        System.out.println(">>> Call index()");
         return "index";
     }
 }
