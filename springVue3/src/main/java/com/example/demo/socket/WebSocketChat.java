@@ -1,5 +1,9 @@
 package com.example.demo.socket;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -11,8 +15,8 @@ import javax.websocket.Session;
 import javax.websocket.server.PathParam;
 import javax.websocket.server.ServerEndpoint;
 import java.io.IOException;
-import java.util.Collections;
-import java.util.HashSet;
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
@@ -26,14 +30,16 @@ public class WebSocketChat {
 
     private static AtomicInteger onlinePersons = new AtomicInteger(0);
     private static Map<String, Set<Session>> roomMap = new ConcurrentHashMap<>(8);
-//    private static Set<Session> clients = Collections.synchronizedSet(new HashSet<Session>());
+    private static Map<String, ArrayList<?>> chatList = new ConcurrentHashMap<>(8);
+
+
 
     @OnMessage
     public void onMessage(@PathParam("roomId") String room, Session session, String msg) throws IOException {
         System.out.println(">>> Receive message: " + msg);
         Set<Session> sessions = roomMap.get(room);
 
-        for(Session s : sessions) {
+        for (Session s : sessions) {
             System.out.println(">>> send data : " + msg);
             s.getBasicRemote().sendText(msg);
         }
@@ -41,7 +47,7 @@ public class WebSocketChat {
 
     @OnOpen
     public void onOpen(@PathParam("roomId") String room, Session session) {
-        System.out.println(">>> Open Session("+ room +"): " + session.toString());
+        System.out.println(">>> Open Session(" + room + "): " + session.toString());
         Set<Session> set = roomMap.get(room);
         if (set == null) {
             set = new CopyOnWriteArraySet();
@@ -70,4 +76,16 @@ public class WebSocketChat {
         System.out.println(">>> Session close: " + session);
 //        clients.remove(session);
     }
+
+    @Data
+    @NoArgsConstructor
+    @AllArgsConstructor
+    static class RoomObj {
+        @Builder.Default
+        private Set<Session> sessions = new CopyOnWriteArraySet();
+        @Builder.Default
+        private static Map<String, ArrayList<?>> chatList = new ConcurrentHashMap<>(8);
+        private String msg;
+        private AtomicInteger onlinePersons = new AtomicInteger(0);
+    };
 }

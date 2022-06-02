@@ -17,6 +17,7 @@ public class RoomController {
 
     @GetMapping("")
     public Map<String, Object> getRooms() {
+        System.out.println(">>> Call getRooms()");
         Map<String, Object> res = new HashMap<>();
 
         List<Room> rooms = tempRepository.getRooms();
@@ -28,6 +29,7 @@ public class RoomController {
 
     @PostMapping("")
     public Map<String, Object> postRoom(@RequestBody Map<String, Object> req) {
+        System.out.println(">>> Call postRoom()");
         Map<String, Object> res = new HashMap<>();
 
         String roomName = String.valueOf(req.get("roomName"));

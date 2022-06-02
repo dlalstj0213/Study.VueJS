@@ -9,14 +9,14 @@
       </div>
       <div>
         <label for="">Owner:</label>
-        <input type="text" v-model="nickname" disabled />
+        <input type="text" v-model="currentUser" disabled />
       </div>
 
       <button @click="createRoom">Create</button>
     </div>
     <h4 for="">Room List</h4>
     <RoomItem
-      v-for="room in rooms"
+      v-for="room in this.$store.getters.getRooms"
       :number="room.number"
       :roomName="room.roomName"
       :owner="room.owner"
@@ -29,7 +29,6 @@
 
 <script>
 import RoomItem from "@/views/components/RoomItem.vue";
-import { get, post } from "@/utils/httpClient";
 
 export default {
   name: "RoomList",
@@ -38,31 +37,34 @@ export default {
   },
   data() {
     return {
-      nickname: "",
       roomName: "",
       total: 1,
-      rooms: [],
     };
   },
   async mounted() {
-    this.nickname = this.$store.getters.getNickname;
-    const { rooms } = await get("/room");
-    this.rooms = rooms;
+    await this.$store.dispatch("fetchRooms");
   },
   methods: {
     async createRoom() {
       if (this.roomName.trim() === "" || this.total < 1) return;
       const data = {
         roomName: this.roomName,
-        owner: this.nickname,
+        owner: this.currentUser,
         total: this.total,
       };
-      const { room } = await post("/room", data);
-      this.rooms.push(room);
+      await this.$store.dispatch("createRoom", data);
       this.roomName = "";
       this.total = 1;
     },
   },
+  computed: {
+    rooms() {
+      return this.$store.getters.getRooms;
+    },
+    currentUser() {
+      return this.$store.getters.getNickname;
+    },
+  }
 };
 </script>
 
