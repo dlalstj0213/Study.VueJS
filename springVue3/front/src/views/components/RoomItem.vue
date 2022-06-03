@@ -8,7 +8,7 @@
         <p>{{ roomName }}</p>
       </div>
       <div>
-        <button @click="join">Join</button>
+        <button @click="clickHandler" v-bind:disabled="this.participants.length >= this.total">Join</button>
       </div>
     </div>
     <div class="bottom">
@@ -34,14 +34,16 @@ export default {
       default: 0,
       type: Number,
     },
+    click: {
+      type: Function,
+      default(){
+        return;
+      }
+    }
   },
   methods: {
-    join() {
-      this.$router.push({
-        name: "Chat",
-        params: { roomNumber: this.number },
-        query: { roomName: this.roomName },
-      });
+    clickHandler() {
+      this.click({roomNumber: this.number, roomName: this.roomName});
     },
   },
   computed: {

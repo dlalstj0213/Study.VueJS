@@ -39,7 +39,7 @@ public class RoomController {
                 .roomName(roomName)
                 .owner(owner)
                 .total(total)
-                .participants(new ArrayList<>())
+                .participants(new HashSet<>())
                 .build();
         tempRepository.addRoom(room);
         List<User> list = tempRepository.getUsers().stream().filter(item -> item.getNickname().equals(owner)).collect(Collectors.toList());
@@ -49,5 +49,16 @@ public class RoomController {
         res.put("room", room);
 
         return res;
+    }
+
+    @PostMapping("/participant")
+    public void postParticipant(@RequestBody Map<String, Object> req) {
+        System.out.println(">>> Call postParticipant()");
+        String participant = String.valueOf(req.get("participant"));
+        int roomNumber = Integer.parseInt(String.valueOf(req.get("roomNumber")));
+        List<Room> list = tempRepository.getRooms().stream().filter(item -> item.getNumber() == roomNumber).collect(Collectors.toList());
+        if(list.size() == 1) {
+            list.get(0).getParticipants().add(participant);
+        }
     }
 }

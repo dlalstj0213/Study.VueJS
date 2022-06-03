@@ -23,6 +23,7 @@
       :participants="room.participants"
       :total="room.total"
       :key="room.number"
+      :click="clickEventHandler"
     />
   </div>
 </template>
@@ -56,6 +57,13 @@ export default {
       this.roomName = "";
       this.total = 1;
     },
+    clickEventHandler({roomNumber, roomName}){
+      this.$router.push({
+        name: "Chat",
+        params: {roomNumber},
+        query: {roomName},
+      });
+    }
   },
   computed: {
     rooms() {

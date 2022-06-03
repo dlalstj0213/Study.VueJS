@@ -1,35 +1,58 @@
-import { get, post } from "@/utils/httpClient";
+import { get } from "@/utils/httpClient";
 
 const Chat = {
     state() {
         return {
             chat: {
+                roomNumber: "",
                 roomName: "",
                 records: []
             },
         };
     },
     mutations: {
-        getChatRecords(state, rooms) {
-            state.rooms = rooms;
+        setRecords(state, records) {
+            state.chat.records = records;
         },
-        addRoom(state, room) {
-            state.rooms.push(room);
+        setRoomInfo(state, {roomName, roomNumber}) {
+            state.chat.roomName = roomName;
+            state.chat.roomNumber = roomNumber;
+        },
+        pushRecords(state, value) {
+            state.chat.records.push(value);
         }
     },
     actions: {
-        async fetchRooms({commit}) {
-            const {rooms} = await get("/room");
-            commit("setRooms", rooms);
+        async fetchChatRecords({commit}, roomNumber) {
+            commit("setRecords", []);
+            const data = await get(`/chat?roomNumber=${roomNumber}`);
+            if (data.length > 0) {
+                commit("setRecords", data);
+            }
         },
-        async createRoom(context, {roomName, owner, total}) {
-            const { room } = await post("/room", {roomName, owner, total});
-            context.commit("addRoom", room);
-        }
+        initRoomInfo({commit}, {roomName, roomNumber}) {
+            commit("setRoomInfo", {roomName, roomNumber});
+        },
+        addChat({commit}, data) {
+            const {nickname, comment} = data;
+            commit("pushRecords", {nickname, comment});
+        },
     },
     getters: {
-        getRooms(state) {
-            return state.rooms;
+        getChatRecords(state){
+            return state.chat.records;
+        },
+        getRoomName(state) {
+            return state.chat.roomName;
+        },
+        getRoomNumber(state){
+            return state.chat.roomNumber;
+        },
+        getRoomInfo(state) {
+            return {
+                roomName: state.chat.roomName,
+                roomNumber: state.chat.roomNumber
+            }
         }
     },
 };

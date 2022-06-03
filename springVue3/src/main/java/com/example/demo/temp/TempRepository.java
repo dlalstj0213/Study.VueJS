@@ -15,17 +15,17 @@ public class TempRepository {
      * init
      */
     public TempRepository() {
-        User user = User.builder().nickname("Admin").rooms(new ArrayList<Room>()).build();
-        Room room = Room.builder()
-                .owner("Admin")
-                .total(3)
-                .roomName("채팅방 임시 - 1")
-                .participants(new ArrayList<String>())
-                .build();
-        user.getRooms().add(room);
-        room.getParticipants().add(user.getNickname());
-        this.users.add(user);
-        this.addRoom(room);
+//        User user = User.builder().nickname("Admin").rooms(new ArrayList<Room>()).build();
+//        Room room = Room.builder()
+//                .owner("Admin")
+//                .total(3)
+//                .roomName("채팅방 임시 - 1")
+//                .participants(new ArrayList<String>())
+//                .build();
+//        user.getRooms().add(room);
+//        room.getParticipants().add(user.getNickname());
+//        this.users.add(user);
+//        this.addRoom(room);
     }
 
     public User addUser(User user) {

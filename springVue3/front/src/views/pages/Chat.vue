@@ -1,9 +1,9 @@
 <template>
   <div>
-    <div class="room-name">{{ roomName }}</div>
+    <div class="room-name">{{ getRoomInfo.roomName }}</div>
     <div id="screen" class="screen">
       <CommentBox
-        v-for="(chat, idx) in chats"
+        v-for="(chat, idx) in getRecords"
         :key="idx"
         :from="this.$store.getters.getNickname"
         :comment="chat.comment"
@@ -27,9 +27,7 @@ export default {
   },
   data() {
     return {
-      roomName: this.$route.query.roomName,
-      chats: [],
-      ws: createSocket(this.$route.params.roomNumber),
+      ws: createSocket(this.$route.params.roomNumber, this.$store.getters.getNickname),
     };
   },
   methods: {
@@ -51,8 +49,16 @@ export default {
     },
     addCommentBox({ from, msg, date }) {
       console.log(date);
-      return this.chats.push({ nickname: from, comment: msg });
+      this.$store.dispatch("addChat", { nickname: from, comment: msg })
     },
+  },
+  computed: {
+    getRecords(){
+      return this.$store.getters.getChatRecords;
+    },
+    getRoomInfo() {
+      return this.$store.getters.getRoomInfo;
+    }
   },
   watch: {
     chats(v) {
@@ -60,6 +66,11 @@ export default {
     },
   },
   mounted() {
+    const roomNumber = this.$route.params.roomNumber;
+    const roomName = this.$store.getters.getRooms.find(item => item.number == this.$route.params.roomNumber).roomName;
+    this.$store.dispatch("initRoomInfo", {roomName, roomNumber});
+    this.$store.dispatch("fetchChatRecords", roomNumber);
+
     this.ws.onmessage = (msg) => {
       let data = JSON.parse(msg.data);
       this.addCommentBox(data);

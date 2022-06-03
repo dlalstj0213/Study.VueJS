@@ -8,7 +8,7 @@
         <p>채팅방명</p>
       </div>
       <div>
-        <button>참가</button>
+        <button v-bind:disabled="isDisabled">참가</button>
       </div>
     </div>
     <div class="bottom">
@@ -25,6 +25,11 @@
 <script>
 export default {
   name: "RoomItem",
+  data(){
+    return {
+      isDisabled : false
+    }
+  }
 };
 </script>
 
