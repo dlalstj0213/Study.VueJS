@@ -14,6 +14,7 @@
 //     WelcomePage,
 //   },
 // };
+console.log(process.env);
 </script>
 
 <style lang="scss">

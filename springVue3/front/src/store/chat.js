@@ -25,7 +25,7 @@ const Chat = {
     actions: {
         async fetchChatRecords({commit}, roomNumber) {
             commit("setRecords", []);
-            const data = await get(`/chat?roomNumber=${roomNumber}`);
+            const data = await get(`/chat`, {roomNumber});
             if (data.length > 0) {
                 commit("setRecords", data);
             }

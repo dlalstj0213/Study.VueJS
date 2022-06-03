@@ -10,7 +10,7 @@ module.exports = {
     },
     proxy: {
       '/api': {
-        target: "http://localhost:8081/",
+        target: process.env.VUE_APP_API_BASE_URL || "http://localhost:8081",
         changeOrigin: true
       }
     }

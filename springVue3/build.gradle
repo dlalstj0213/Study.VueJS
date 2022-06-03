@@ -21,7 +21,7 @@ node {
 task yarnBuild(type: YarnTask) {
 //    dependsOn cleanDistAndStatic
 //    dependsOn npmInstall
-    args = ['run', "build"]
+    args = ['run', "build", "--mode", "development"]
 }
 
 /* dist 하위 파일을 static 폴더에 복사 */
@@ -31,7 +31,7 @@ task copyDistToStatic(type: Copy) {
     includeEmptyDirs = true
 }
 
-processResources.dependsOn 'yarnBuild'
+//processResources.dependsOn 'yarnBuild'
 //processResources.dependsOn 'copyDistToStatic'
 
 /* build 실행시 jar 파일만들때 먼저 프론트 빌드관련 task 실행 */
