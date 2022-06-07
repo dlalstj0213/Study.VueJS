@@ -8,7 +8,8 @@ spring:
     prefix: classpath:/static/
     enabled: true
     cache: false
-
+  freemarker:
+    cache: false
 
 server:
   port: 8081
