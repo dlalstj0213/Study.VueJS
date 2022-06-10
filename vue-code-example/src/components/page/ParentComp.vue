@@ -3,7 +3,7 @@
   <child-comp />
 </template>
 <script>
-import ChildComp from "./ChildComp.vue";
+import ChildComp from "../ChildComp.vue";
 
 export default {
   name: "parent-comp",

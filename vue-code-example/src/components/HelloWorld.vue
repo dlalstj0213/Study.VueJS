@@ -3,20 +3,14 @@
     <global-component />
     <local-component />
   </div>
-  <div>
-    <br />
-    <parent-comp />
-  </div>
 </template>
 
 <script>
 import LocalComponent from "./LocalComponent.vue";
-import ParentComp from "./ParentComp.vue";
 
 export default {
   components: {
     LocalComponent,
-    ParentComp,
   },
   name: "HelloWorld",
 };
