@@ -1,7 +1,7 @@
 <template>
   <div class="side-bar">
     <router-link :to="'/'">Main</router-link> <br />
-    <router-link :to="'/test'">Parent & Child</router-link>
+    <router-link :to="'/props'">Props</router-link>
   </div>
 </template>
 <script>

@@ -10,7 +10,9 @@ export default {
   data() {
     return {};
   },
-  props: {},
+  props: {
+    str: Array,
+  },
   methods: {},
   computed: {},
   watch: {},

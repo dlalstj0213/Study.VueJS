@@ -7,9 +7,9 @@ const routes = [
     component: () => import("@/components/page/Main.vue"),
   },
   {
-    path: "/test",
-    name: "ParentNChild",
-    component: () => import("@/components/page/ParentComp.vue"),
+    path: "/props",
+    name: "Props",
+    component: () => import("@/components/page/PropsComp.vue"),
   },
 ];
 
