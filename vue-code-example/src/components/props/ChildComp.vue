@@ -3,6 +3,7 @@
     <h1>{{ title }}</h1>
     <h2>Copyed Title : {{ copyedTitle }}</h2>
     <h2>Two Type of props : {{ propB }}</h2>
+    <h2>id? : {{ id }}</h2>
   </div>
 </template>
 
@@ -13,6 +14,7 @@ export default {
   props: {
     title: String,
     propB: [String, Number],
+    id: Number,
   },
   data() {
     return {

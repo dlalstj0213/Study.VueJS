@@ -2,6 +2,7 @@
   <child-comp
     v-bind:title="'This is Child Component'"
     :propB="1234"
+    id="5324"
   ></child-comp>
 </template>
 
