@@ -16,6 +16,11 @@ const routes = [
     name: "NonProp",
     component: () => import("@/components/page/NonPropComp.vue"),
   },
+  {
+    path: "/emits",
+    name: "Emits",
+    component: () => import("@/components/page/EmitsComp.vue"),
+  },
 ];
 
 export const router = createRouter({
