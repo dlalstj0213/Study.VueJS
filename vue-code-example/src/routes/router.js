@@ -21,6 +21,11 @@ const routes = [
     name: "Emits",
     component: () => import("@/components/page/EmitsComp.vue"),
   },
+  {
+    path: "/slots",
+    name: "Slots",
+    component: () => import("@/components/page/SlotsComp.vue"),
+  },
 ];
 
 export const router = createRouter({
